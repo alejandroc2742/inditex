@@ -10,7 +10,7 @@ Los **controladores** REST están ubicados en el paquete **com.inditex.prices.in
 Las **entidades** que interactúan con la base de datos están en el paquete **com.inditex.prices.infrastructure.adapter.out.persistence.entity**
 
 ### Validación con ArchUnit:
-
+ArchUnit es una biblioteca para validar la arquitectura de aplicaciones Java, permitiendo definir y verificar reglas sobre la estructura y las dependencias del código.
 Para asegurar el cumplimiento de las reglas de arquitectura, se han implementado pruebas con ArchUnit, como:
 - **servicesShouldNotDependOnControllers**: Garantiza que los servicios no dependan de los controladores.
 - **controllersShouldDependOnServices:** Valida que los controladores dependan de los servicios, pero no al revés.
@@ -50,21 +50,13 @@ Este proyecto incluye un Dockerfile que permite empaquetar y desplegar la aplica
 
 
 #### Instrucciones para construir y ejecutar el contenedor Docker:
-- Construir la imagen:
+- Construir la imagen
 
-    docker build -t inditex-prices-app .
-Ejecutar la aplicación:
-
-
-
-    docker run -p 8080:8080 inditex-prices-app
-La aplicación estará disponible en 
-
-
-
-    http://localhost:8080/prices
-
-
+> docker build -t inditex-prices-app .
+ - Ejecutar la aplicación:
+> docker run -p 8080:8080 inditex-prices-app
+ - La aplicación estará disponible en 
+> http://localhost:8080/prices
 ### Patrones de diseño
 Se ha empleado el patrón Builder tanto para el modelo de dominio como para el de infraestructura:
 
