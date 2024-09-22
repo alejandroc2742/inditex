@@ -50,7 +50,13 @@ Este proyecto incluye un Dockerfile que permite empaquetar y desplegar la aplica
 
 
 #### Instrucciones para construir y ejecutar el contenedor Docker:
-- Construir la imagen
+
+ - Crear el jar
+ Ejecutar sobre la carpeta del proyecto:
+
+> mvn clean install
+
+ - Construir la imagen
 
 > docker build -t inditex-prices-app .
  - Ejecutar la aplicación:
