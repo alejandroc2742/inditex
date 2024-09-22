@@ -19,10 +19,6 @@ Para asegurar el cumplimiento de las reglas de arquitectura, se han implementado
 - **servicesShouldBeAnnotatedWithService**
 Este test verifica que todas las clases en el paquete com.inditex.prices cuyo nombre termina en "**Service**" estén anotadas con @Service.
 
-### Patrón Builder:
-
-Se ha implementado el Patrón Builder en las clases de dominio e infraestructura para garantizar la creación controlada de instancias.
-El modelo de dominio (Price) fue desarrollado manualmente, evitando dependencias de frameworks externos, mientras que el modelo de infraestructura (PriceEntity) emplea Lombok para simplificar su construcción.
 
 ### Cobertura de código:
 
