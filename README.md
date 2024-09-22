@@ -30,7 +30,7 @@ El proyecto cuenta con una cobertura de pruebas superior al 90%, lo que garantiz
 Se ha integrado Spring Boot Actuator en la aplicación para proporcionar monitoreo y gestión. Actuator permite verificar la salud de la aplicación, acceder a métricas y obtener información del entorno, facilitando el mantenimiento y la optimización del servicio.
 
 
-###🚀 Swagger UI:🚀
+### 🚀Swagger UI:🚀
 
 Se ha integrado Swagger UI para facilitar la interacción con otros equipos de desarrollo y la documentación de los endpoints REST.
 Se puede acceder a Swagger UI en la ruta **/swagger-ui.html** cuando la aplicación esté en ejecución.
