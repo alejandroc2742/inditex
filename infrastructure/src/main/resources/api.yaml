@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: API de Precios
+  description: API para gestionar precios de productos.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+
+paths:
+  /prices:
+    get:
+      summary: Obtener precios según parámetros
+      parameters:
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64  
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64  
+        - name: applicationDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time  # Asegúrate de mantener esto
+            example: "2024-06-14T10:00:00"
+      responses:
+        '200':
+          description: Precio encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'  
+        '404':
+          description: No se encontró ningún precio
+components:
+  schemas:
+    Price:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 35455
+        brandId:
+          type: integer
+          format: int64
+          example: 1
+        priceList:
+          type: integer
+          format: int64
+          example: 1
+        price:
+          type: number
+          format: float
+          example: 35.50
+        startDate:
+          type: string
+          format: date-time
+          example: "2024-06-14T00:00:00"
+        endDate:
+          type: string
+          format: date-time
+          example: "2024-06-14T23:59:59"
+        currency:
+          type: string
+          example: "EUR"
+        priority:
+          type: integer
+          example: 1

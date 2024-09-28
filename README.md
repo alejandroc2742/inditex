@@ -1,84 +1,95 @@
-# Aplicación de Precios - Inditex
-Este proyecto es una API desarrollada en Spring Boot 3 con Java 17, que ofrece un servicio para obtener el precio de un producto en función de la fecha de aplicación, la marca y el producto.
+# 📣Aplicacion de Precios - Inditex📣
 
-## Características principales
-### Arquitectura Hexagonal (Ports and Adapters):
+Este proyecto es una API desarrollada en Spring Boot 3 con Java 17, que ofrece un servicio para obtener el precio de un producto en función de la fecha de aplicación, la marca y el producto. Además, se ha estructurado como un proyecto multi-módulo Maven para evitar el uso indebido de clases en capas donde no tienen relación, garantizando así un mejor desacoplamiento y organización del código.
 
-El proyecto sigue una arquitectura hexagonal, donde las distintas capas están separadas y desacopladas.
-Los **servicios** se encuentran en el paquete **com.inditex.prices.application.service**
-Los **controladores** REST están ubicados en el paquete **com.inditex.prices.infrastructure.adapter.in.rest**
-Las **entidades** que interactúan con la base de datos están en el paquete **com.inditex.prices.infrastructure.adapter.out.persistence.entity**
+## Caracteristicas principales
 
-### Validación con ArchUnit:
-ArchUnit es una biblioteca para validar la arquitectura de aplicaciones Java, permitiendo definir y verificar reglas sobre la estructura y las dependencias del código.
-Para asegurar el cumplimiento de las reglas de arquitectura, se han implementado pruebas con ArchUnit, como:
-- **servicesShouldNotDependOnControllers**: Garantiza que los servicios no dependan de los controladores.
-- **controllersShouldDependOnServices:** Valida que los controladores dependan de los servicios, pero no al revés.
-- **entitiesShouldBePublic**: Verifica que las entidades sean públicas.
+### Arquitectura Hexagonal (Ports and Adapters):🗼
 
-- **servicesShouldBeAnnotatedWithService**
-Este test verifica que todas las clases en el paquete com.inditex.prices cuyo nombre termina en "**Service**" estén anotadas con @Service.
+El proyecto sigue una arquitectura hexagonal, donde las distintas capas estan separadas y desacopladas. Las capas principales son:
 
-### Patrón Builder:
+-   Los servicios se encuentran en el paquete com.inditex.prices.application.service
+-   Los controladores REST estan ubicados en el paquete com.inditex.prices.infrastructure.adapter.in.rest
+-   Las entidades que interactuan con la base de datos estan en el paquete com.inditex.prices.infrastructure.adapter.out.persistence.entity
 
-Se ha implementado el Patrón Builder en las clases de dominio e infraestructura para garantizar la creación controlada de instancias.
-El modelo de dominio (Price) fue desarrollado manualmente, evitando dependencias de frameworks externos, mientras que el modelo de infraestructura (PriceEntity) emplea Lombok para simplificar su construcción.
+### Validacion con ArchUnit:🔎
 
-### Cobertura de código:
+ArchUnit es una biblioteca para validar la arquitectura de aplicaciones Java. Se han implementado pruebas con ArchUnit para asegurar el cumplimiento de reglas arquitectonicas, tales como:
 
-El proyecto cuenta con una cobertura de pruebas superior al 90%, lo que garantiza la calidad del código y la funcionalidad de los servicios ofrecidos.
+-   **servicesShouldResideInServicePackage**: Este método valida que todas las clases de servicio deben residir en el paquete  `..service..`. Garantiza que los servicios estén correctamente organizados dentro de su capa específica.
+    
+-   **repositoriesShouldResideInRepositoryPackage**: Este método asegura que todas las clases relacionadas con repositorios estén ubicadas en el paquete  `..repository..`, manteniendo la consistencia en la estructura de persistencia de datos.
+    
+-   **mappersShouldResideInMapperPackage**: Este método verifica que todas las clases de mapeo (mappers) se encuentren en el paquete  `..mapper..`. Adicionalmente, valida que los mappers sean interfaces y estén anotados con  `@Mapper`  de MapStruct.
+    
 
+### Patron Builder:🗿
 
-### Spring Boot Actuator
+Se ha implementado el Patron Builder en las clases de dominio e infraestructura para garantizar la creacion controlada de instancias.
 
-Se ha integrado Spring Boot Actuator en la aplicación para proporcionar monitoreo y gestión. Actuator permite verificar la salud de la aplicación, acceder a métricas y obtener información del entorno, facilitando el mantenimiento y la optimización del servicio.
+-   El modelo de dominio (Price) fue desarrollado manualmente, evitando dependencias de frameworks externos.
+-   El modelo de infraestructura (PriceEntity) emplea Lombok para simplificar su construccion.
 
+### Cobertura de codigo:📈
 
-### Swagger UI:
+El proyecto cuenta con una cobertura de pruebas superior al 90%, lo que garantiza la calidad del codigo y la funcionalidad de los servicios ofrecidos. Los informes de JaCoCo se encuentran en la ruta target/site/index.html.
 
-Se ha integrado Swagger UI para facilitar la interacción con otros equipos de desarrollo y la documentación de los endpoints REST.
-Se puede acceder a Swagger UI en la ruta **/swagger-ui.html** cuando la aplicación esté en ejecución.
-### Formato de fechas:
+### Spring Boot Actuator:📤
 
-Los endpoints que reciben fechas como parámetro utilizan el formato ISO 8601 (yyyy-MM-dd'T'HH:mm:ss). Este formato es soportado automáticamente por Spring, facilitando el uso de la API.
+Se ha integrado Spring Boot Actuator para proporcionar monitoreo y gestion. Actuator permite verificar la salud de la aplicacion, acceder a metricas y obtener informacion del entorno, facilitando el mantenimiento y la optimizacion del servicio.
 
-### MapStruct 
-Fue usado ya que facilita el mapeo de objetos en Java al generar automáticamente código en tiempo de compilación, eliminando la necesidad de escribir conversiones manuales. Esto ahorra tiempo, reduce errores y mejora el rendimiento al evitar el uso de reflexión.
+### Swagger UI:🔨
 
-### Dockerización
-Este proyecto incluye un Dockerfile que permite empaquetar y desplegar la aplicación fácilmente en cualquier entorno compatible con Docker.
+Se ha integrado Swagger UI para facilitar la interacción con otros equipos de desarrollo y para documentar los endpoints REST de la API. Swagger UI es accesible en la ruta  `/swagger-ui.html`  una vez que la aplicación está en ejecución.
 
+El contrato de la API se encuentra almacenado en  `/infrastructure/src/main/resources/api.yaml`, desde el cual se generan tanto la interfaz del controlador como lo DTO (Data Transfer Object) que se devuelve al usuario.
 
-#### Instrucciones para construir y ejecutar el contenedor Docker:
-- Construir la imagen
+### Formato de fechas:⌛️
+
+Los endpoints que reciben fechas como parametro utilizan el formato ISO 8601 (yyyy-MM-dd’T’HH:mm
+
+). Este formato es soportado automaticamente por Spring, facilitando el uso de la API.
+
+### MapStruct:➿
+
+Se utilizo MapStruct para facilitar el mapeo de objetos en Java al generar automaticamente el codigo en tiempo de compilacion. Esto reduce la necesidad de conversiones manuales, ahorra tiempo y mejora el rendimiento al evitar el uso de reflexion.
+
+### Dockerizacion:⚓️
+
+El proyecto incluye un Dockerfile para empaquetar y desplegar la aplicacion facilmente en cualquier entorno compatible con Docker.
+
+#### Instrucciones para construir y ejecutar el contenedor Docker:⚓️
+
+-   Construir la imagen: 
 
 > docker build -t inditex-prices-app .
- - Ejecutar la aplicación:
+
+-   Ejecutar la aplicacion: 
+
 > docker run -p 8080:8080 inditex-prices-app
- - La aplicación estará disponible en 
-> http://localhost:8080/prices
-### Patrones de diseño
-Se ha empleado el patrón Builder tanto para el modelo de dominio como para el de infraestructura:
 
-- El modelo de dominio fue implementado manualmente, evitando el uso de frameworks o librerías externas, para tener un mayor control sobre su diseño.
+-   La aplicacion estara disponible en:  
 
-- El modelo de infraestructura fue desarrollado utilizando Lombok, lo que permite simplificar el código y reducir la cantidad de código repetitivo, facilitando su mantenimiento.
+> [http://localhost:8080/prices](http://localhost:8080/prices)
 
-### Colecciones de Postman
+### Patrones de diseño:🏁
 
-Se han añadido colecciones de Postman para facilitar las pruebas del servicio. Las colecciones se encuentran en la ruta:
+Se ha empleado el patron Builder tanto para el modelo de dominio como para el de infraestructura:
 
-    src/main/resources/postman/prices_collection.json
+-   El modelo de dominio fue implementado manualmente para tener un mayor control sobre su diseno.
+-   El modelo de infraestructura fue desarrollado utilizando Lombok, lo que permite simplificar el codigo y reducir la cantidad de codigo repetitivo.
 
+### Colecciones de Postman:▶️
 
-#### Cómo importar la colección a Postman
+Se han añadido colecciones de Postman para facilitar las pruebas del servicio. Las colecciones se encuentran en la ruta: src/main/resources/postman/prices_collection.json
 
-- Abrir Postman.
-- Hacer clic en el botón "Import" en la esquina superior izquierda.
-- Seleccionar la pestaña "File" y elegir el fichero `prices_collection.json`.
-- Hacer clic en "Import" para cargar la colección.
+#### Como importar la coleccion a Postman:
 
-Una vez importada, se podrá realizar las pruebas definidas en la colección.
+-   Abrir Postman.
+-   Hacer clic en el boton “Import” en la esquina superior izquierda.
+-   Seleccionar la pestaña “File” y elegir el fichero prices_collection.json.
+-   Hacer clic en “Import” para cargar la coleccion. Una vez importada, se podran realizar las pruebas definidas en la coleccion.
 
-### Licencia
-Este proyecto está bajo la Licencia GPL.
+### Licencia:🍻
+
+Este proyecto esta bajo la Licencia GPL.
