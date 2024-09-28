@@ -1,8 +1,8 @@
 # 📣Aplicacion de Precios - Inditex📣
 
-Este proyecto es una API desarrollada en Spring Boot 3 con Java 17, que ofrece un servicio para obtener el precio de un producto en función de la fecha de aplicación, la marca y el producto. Además, se ha estructurado como un proyecto multi-módulo Maven para evitar el uso indebido de clases en capas donde no tienen relación, garantizando así un mejor desacoplamiento y organización del código.
+Este proyecto es una API desarrollada en Spring Boot 3 con Java 17, que ofrece un servicio para obtener el precio de un producto en funcion de la fecha de aplicacion, la marca y el producto.
 
-## Caracteristicas principales
+## Caracteristicas principales🔆
 
 ### Arquitectura Hexagonal (Ports and Adapters):🗼
 
